@@ -93,6 +93,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "normalize.css": "^8.0.0",
     "sass-loader": "^7.1.0"
   }
 }
