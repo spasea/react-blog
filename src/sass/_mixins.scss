@@ -1,3 +1,31 @@
+@mixin flex($direction: 'row', $flow: 'wrap', $important: '') {
+  display: flex unquote($important);
+  flex-flow: unquote($direction) unquote($flow) unquote($important);
+}
+
+@mixin basis($basis: auto, $grow: 1, $shrink: 1, $important: '') {
+  flex: $basis $grow $shrink unquote($important);
+}
+
+$properties: (
+  align: 'align-items',
+  justify: 'justify-content',
+  end: 'flex-end',
+  start: 'flex-start',
+  between: 'space-between',
+  around: 'space-around'
+);
+
+@mixin alignment($property: 'align', $value: 'center', $important: '') {
+  @if map-has-key($properties, $property) {
+    $property: map-get($properties, $property);
+  }
+  @if map-has-key($properties, $value) {
+    $value: map-get($properties, $value);
+  }
+  #{$property}: unquote($value) unquote($important);
+}
+
 @mixin el($name) {
   @at-root #{&}__#{$name} {
     @content;
@@ -21,5 +49,17 @@
     url("./fonts/#{$fontName}/#{$fullFont}/#{$fullFont}.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
+  }
+}
+
+@mixin object-fit($fit: fill, $position: null){
+  -o-object-fit: $fit;
+  object-fit: $fit;
+  @if $position {
+    -o-object-position: $position;
+    object-position: $position;
+    font-family: 'object-fit: #{$fit}; object-position: #{$position}';
+  } @else {
+    font-family: 'object-fit: #{$fit}';
   }
 }

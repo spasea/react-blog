@@ -7,7 +7,7 @@ import UserAvatar from './assets/user-avatar.png'
 class App extends Component {
   render() {
     return (
-      <main>
+      <main className='main-wrapper'>
         {/*<div className='stag__book' style={{*/}
           {/*fontSize: '17px'*/}
         {/*}}>*/}
@@ -26,7 +26,9 @@ class App extends Component {
         {/*</div>*/}
 
       <div className='background'>
-        <img className='background__image' src={TopBg} alt="story bg"/>
+        <div className='background__image-wrapper'>
+          <img className='background__image' src={TopBg} alt="story bg"/>
+        </div>
         <div className='background__color-box'/>
       </div>
       <div className='content'>

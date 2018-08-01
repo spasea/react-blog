@@ -1,10 +1,15 @@
 @import "../node_modules/normalize.css/normalize.css";
 @import "sass/mixins";
-
-body {
-  .main {
-    background: red;
-  }
-}
+@import "sass/custom-normalizing";
 
 @import "sass/fonts";
+@import "sass/main";
+
+body {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.dn {
+  display: none !important;
+}
