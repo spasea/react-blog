@@ -130,6 +130,27 @@ class App extends Component {
               </section>
             </div>
 
+            <form className='comments-feedback__form comments-feedback__form--reply dn'>
+              <div className='comments-feedback__form-actions'>
+                <h4 className={`
+                  comments-item__author-name comments-item__author-name--replied
+                  comments-item__author-name--small
+                `}>
+                  <FontAwesomeIcon icon="share"/> Kurt Thompson
+                </h4>
+                <button className='comments-item__action'>
+                  <FontAwesomeIcon icon="times"/> Cancel
+                </button>
+              </div>
+              <div className='comments-feedback__form-wrapper'>
+                <textarea
+                  className='comments-feedback__textarea'
+                  cols="30" rows="10"
+                  placeholder='Your Message'
+                />
+                <button className='comments-feedback__submit-button' type='submit'>Send</button>
+              </div>
+            </form>
 
             <ul className="comments-item__children">
               <li className='comments-item comments-item--child'>

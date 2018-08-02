@@ -1,6 +1,7 @@
 @include addFont(Stag, Book);
 @include addFont(Stag, Semibold);
 @include addFont(Stag, Medium);
+@include addFont(Stag, Light);
 
 .stag {
   @include el(book) {
@@ -13,5 +14,9 @@
 
   @include el(medium) {
     font-family: Stag-Medium;
+  }
+
+  @include el(light) {
+    font-family: Stag-Light;
   }
 }
