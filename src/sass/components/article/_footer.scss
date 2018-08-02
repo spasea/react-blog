@@ -1,0 +1,36 @@
+.article {
+  @include el(summary) {
+    @include flex();
+    @include alignment();
+
+    list-style: none;
+    border: 2px solid #f2f2f2;
+    border-left-width: 0;
+    border-right-width: 0;
+    padding: 0;
+  }
+
+  @include el(summary-item) {
+    @extend .stag__book;
+
+    color: #b6b6b6;
+    font-size: 15px;
+    margin: 18px 55px 17px 0;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    b {
+      @extend .stag__medium;
+
+      font-weight: normal;
+    }
+
+    svg {
+      margin-right: 3px;
+      height: 13px;
+      transform: translateY(-1px);
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.background {
+  @include smaller($xs) {
+    @include el(image-wrapper) {
+      height: 300px;
+    }
+  }
+}

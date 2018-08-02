@@ -1,0 +1,21 @@
+.article {
+  @include smaller($xs) {
+    @include el(image-wrapper) {
+      float: none;
+      transform: translate3d(0, 0, 0);
+      margin-left: -10px;
+      margin-right: -10px;
+      max-width: 260px;
+    }
+
+    @include el(image) {
+      border-width: 5px;
+      box-sizing: border-box;
+      height: 253px;
+    }
+
+    @include el(image-filter) {
+      left: 15px;
+    }
+  }
+}

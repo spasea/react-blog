@@ -1,0 +1,37 @@
+.article {
+  @include el(title) {
+    @extend .stag__semibold;
+
+    @include flex();
+
+    font-size: 30px;
+    width: 100%;
+    border: 0 solid #f2f2f2;
+    border-bottom-width: 2px;
+    position: relative;
+    padding-bottom: 2px;
+    margin-bottom: 7px;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      background: url(assets/heading-star.png) center no-repeat;
+      background-size: cover;
+      height: 32px;
+      width: 32px;
+      transform: translate3d(-56px, 0px, 0);
+    }
+  }
+
+  @include el(date) {
+    @extend .stag__medium;
+
+    color: #b6b6b6;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 11px;
+    margin-left: -1px;
+  }
+}

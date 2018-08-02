@@ -1,0 +1,12 @@
+@import "article/article";
+@import "background/background";
+@import "comments/comments";
+@import "feedback/feedback";
+
+.content {
+  @include smaller($xs) {
+    margin-top: 219px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}

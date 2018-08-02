@@ -52,6 +52,24 @@ $properties: (
   }
 }
 
+@mixin smaller($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin bigger($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin between($smaller-width, $bigger-width) {
+  @media (min-width: $smaller-width) and (max-width: $bigger-width) {
+    @content;
+  }
+}
+
 @mixin object-fit($fit: fill, $position: null){
   -o-object-fit: $fit;
   object-fit: $fit;

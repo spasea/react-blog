@@ -1,0 +1,13 @@
+.article {
+  @include smaller($xs) {
+    @include el(title) {
+      font-size: 25px;
+
+      &:before {
+        transform: translate3d(-34px, 0px, 0);
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+}
