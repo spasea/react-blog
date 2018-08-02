@@ -131,11 +131,47 @@
     transform: translate3d(-80px, 1px, 0);
     margin-right: -60px;
     position: relative;
+
+    &:hover {
+      .article {
+        @include el(image-filter) {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   @include el(image-filter) {
+    @include flex();
+    @include alignment();
+    @include alignment('justify');
+
+    opacity: 0;
+    transition: all 400ms ease;
     position: absolute;
     z-index: 2;
+    background: rgba(#000, 0.5);
+    top: 15px;
+    left: 10px;
+    right: 15px;
+    bottom: 15px;
+    cursor: pointer;
+
+    img {
+      transform: translate3d(1px, 1px, 0px);
+    }
+
+    p {
+      @extend .stag__book;
+
+      position: absolute;
+      font-weight: normal;
+      color: #f2f2f2;
+      font-size: 13px;
+      font-style: italic;
+      bottom: -10px;
+      letter-spacing: -0.3px;
+    }
   }
 
   @include el(image) {

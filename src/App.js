@@ -48,7 +48,7 @@ class App extends Component {
           <div className='article__text'>
             <p>Made last it seen went no just when of by. Occasional entreaties comparison me difficulty so themselves. At brother inquiry of offices without do my service. As particular to companions at sentiments. Weather however luckily enquire so certain do. Aware did stood was day under ask. Dearest affixed enquire on explain opinion he. Reached who the mrs joy offices pleased. Towards did colonel article any parties.</p>
             <div className='article__image-wrapper'>
-              <div className="article__image-filter dn">
+              <div className="article__image-filter">
                 <img src={EyeIcon} alt="eye icon"/>
                 <p>Photo by John Dou</p>
               </div>
