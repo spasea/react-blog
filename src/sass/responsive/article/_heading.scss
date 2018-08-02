@@ -1,5 +1,5 @@
 .article {
-  @include smaller($xs) {
+  @include smaller($sm) {
     @include el(title) {
       font-size: 25px;
 

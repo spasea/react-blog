@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { $axios, config } from '../../App'
+// import { $axios, config } from '../../App'
 
 import UserAvatar from '../../assets/user-avatar.png'
 
@@ -59,7 +59,7 @@ class Comments extends React.Component {
               </section>
             </div>
 
-            <form className='comments-feedback__form comments-feedback__form--reply dn'>
+            <form className='comments-feedback__form comments-feedback__form--reply'>
               <div className='comments-feedback__form-actions'>
                 <h4 className={`
                     comments-item__author-name comments-item__author-name--replied

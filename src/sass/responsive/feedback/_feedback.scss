@@ -1,9 +1,50 @@
 .comments {
-  @include smaller($xs) {
+  @include smaller($lg) {
     @include el(author-wrapper) {
+      @include basis(80px, 1, 0);
+
+      margin-right: 15px;
+
+      @include m(small) {
+        @include basis(60px, 1, 0);
+      }
+    }
+  }
+
+  @include smaller(480px) {
+    @include el(author-wrapper) {
+      @include basis(80px, 0, 0);
+
       margin-bottom: 10px;
       margin-left: auto;
       margin-right: auto;
+
+      @include m(small) {
+        @include basis(60px, 1, 0);
+      }
+    }
+  }
+}
+
+.comments-feedback {
+  @include smaller($lg) {
+    @include el(form) {
+      flex-wrap: nowrap;
+
+      @include m(reply) {
+        flex-wrap: wrap;
+        padding-left: 104px;
+      }
+    }
+  }
+
+  @include smaller(480px) {
+    @include el(form) {
+      flex-wrap: wrap;
+
+      @include m(reply) {
+        padding-left: 0;
+      }
     }
   }
 }

@@ -4,7 +4,7 @@
 @import "feedback/feedback";
 
 .content {
-  @include smaller($xs) {
+  @include smaller($sm) {
     margin-top: 219px;
     padding-left: 40px;
     padding-right: 40px;

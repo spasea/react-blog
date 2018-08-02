@@ -1,11 +1,20 @@
 .comments-item {
-  @include smaller($xs) {
+  @include smaller(480px) {
     @include el(main-wrapper) {
       @include flex('column');
     }
 
     @include el(children) {
       padding-left: 30px;
+    }
+  }
+}
+
+.comments {
+  @include smaller(480px) {
+    @include el(load-button) {
+      font-size: 15px;
+      letter-spacing: 0;
     }
   }
 }

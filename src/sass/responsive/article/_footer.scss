@@ -1,5 +1,5 @@
 .article {
-  @include smaller($xs) {
+  @include smaller($sm) {
     @include el(summary-item) {
       width: 100%;
       margin-right: 0;
