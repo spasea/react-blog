@@ -37,6 +37,7 @@
       height: 2px;
       width: 100%;
       background: #f2f2f2;
+      left: 0;
     }
 
     &:before {
@@ -47,6 +48,8 @@
       width: 208px;
       height: 40px;
       z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 
