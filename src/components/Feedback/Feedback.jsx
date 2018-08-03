@@ -5,11 +5,6 @@ import { $axios, config } from '../../App'
 
 class Feedback extends React.Component {
   addComment = content => {
-    if (content === '') {
-      alert('You must fill the input')
-      return Promise.reject()
-    }
-
     return $axios.post(`/pages/${config.email}/comments`, {
       content,
       parent: null,
