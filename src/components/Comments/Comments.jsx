@@ -12,6 +12,7 @@ class Comments extends React.Component {
       count: 5,
       offset: 0,
       userId: 1,
+      commentsExists: true,
       replyId: null,
       isLoading: false,
     }
@@ -26,12 +27,16 @@ class Comments extends React.Component {
       count,
       offset,
       comments,
+      commentsExists,
     } = this.state
+
+    if (!commentsExists) return
 
     this.setState({
       isLoading: true,
     })
 
+    let _commentsExists = true
     $axios.get(`/pages/${config.email}/comments`, {
         params: {
           count,
@@ -39,6 +44,10 @@ class Comments extends React.Component {
         }
       })
       .then(response => {
+        if (!response.data.length) {
+          _commentsExists = !_commentsExists
+        }
+
         this.setState({
           comments: [
             ...comments,
@@ -46,6 +55,7 @@ class Comments extends React.Component {
           ],
           offset: offset + count,
           isLoading: false,
+          commentsExists: _commentsExists
         })
       })
       .catch(e => alert(e))
@@ -62,6 +72,7 @@ class Comments extends React.Component {
       comments,
       userId,
       isLoading,
+      commentsExists,
     } = this.state
 
     return (
@@ -80,14 +91,18 @@ class Comments extends React.Component {
           }
         </ul>
 
-        <div className='comments__load-container'>
-          <button className='comments__load-button'
-                  disabled={isLoading}
-                  onClick={this.loadComments}
-          >
-            load more comments
-          </button>
-        </div>
+        {
+          commentsExists && (
+            <div className='comments__load-container'>
+              <button className='comments__load-button'
+                      disabled={isLoading}
+                      onClick={this.loadComments}
+              >
+                load more comments
+              </button>
+            </div>
+          )
+        }
       </div>
     )
   }
