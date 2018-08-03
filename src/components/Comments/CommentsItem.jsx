@@ -14,6 +14,7 @@ class CommentsItem extends React.Component {
       isEdit: false,
       formText: '',
       comment: null,
+      idDeleting: false
     }
   }
 
@@ -21,6 +22,40 @@ class CommentsItem extends React.Component {
     this.setState({
       comment: this.props.comment
     })
+  }
+
+  addComment = content =>
+    $axios.post(`/pages/${config.email}/comments`, {
+        content,
+        parent: this.state.comment.id,
+      })
+      .then(() => {
+        alert('Comment was added')
+        // in real project we can add such state management like Mobx or Redux and manage comments list
+        // updating normally instead of reloading page, but I guess reloading is enough for a test project
+        window.location.reload()
+      })
+      .catch(e => alert(e))
+
+  deleteComment = () => {
+    const isDelete = window.confirm('Are you want to delete this comment?')
+    if (!isDelete) return
+
+    this.setState({
+      idDeleting: true
+    })
+
+    $axios.delete(`/pages/${config.email}/comments/${this.state.comment.id}`)
+      .then(() => {
+        alert('Comment was deleted')
+        window.location.reload()
+      })
+      .catch(e => alert(e))
+      .finally(() => {
+        this.setState({
+          idDeleting: false
+        })
+      })
   }
 
   editComment = content => {
@@ -54,6 +89,7 @@ class CommentsItem extends React.Component {
 
     const {
       comment,
+      isDeleting,
     } = this.state
 
     return (
@@ -91,7 +127,10 @@ class CommentsItem extends React.Component {
                 }
                 {
                   +comment.author.id === userId && (
-                    <button className='comments-item__action'>
+                    <button className='comments-item__action'
+                            onClick={this.deleteComment}
+                            disabled={isDeleting}
+                    >
                       <FontAwesomeIcon icon='times'/> Delete
                     </button>
                   )
@@ -117,7 +156,7 @@ class CommentsItem extends React.Component {
                 closeForm={openReplyForm}
                 isEdit={this.state.isEdit}
                 startText={this.state.isEdit ? comment.content : ''}
-                callback={this.editComment}
+                callback={this.state.isEdit ? this.editComment : this.addComment}
               />
             )
           }
