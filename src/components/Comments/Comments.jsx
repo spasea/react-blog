@@ -25,6 +25,7 @@ class Comments extends React.Component {
     const {
       count,
       offset,
+      comments,
     } = this.state
 
     this.setState({
@@ -39,11 +40,15 @@ class Comments extends React.Component {
       })
       .then(response => {
         this.setState({
-          comments: response.data,
+          comments: [
+            ...comments,
+            ...response.data,
+          ],
           offset: offset + count,
           isLoading: false,
         })
       })
+      .catch(e => alert(e))
   }
 
   openReplyForm = (replyId = null) => {
