@@ -1,127 +1,104 @@
 import React from 'react'
+import moment from 'moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import FeedbackForm from '../Feedback/FeedbackForm'
+import CommentsItemChild from './CommentsItemChild'
 
 class CommentsItem extends React.Component {
+  constructor () {
+    super()
+
+    this.state = {
+      isEdit: false,
+      formText: '',
+    }
+  }
+
   render() {
+    const {
+      comment,
+      userId,
+      openReplyForm,
+      replyId,
+    } = this.props
+
+    const posted = moment(comment.created_at)
+
     return (
       <li className='comments-item'>
         <div className='comments-item__main-wrapper'>
           <div className='comments__author-wrapper'>
-            <img className='comments__author-avatar' src={UserAvatar} alt='username'/>
+            <img className='comments__author-avatar' src={comment.author.avatar} alt={comment.author.name}/>
           </div>
 
           <section className='comments-item__data'>
             <div className='comments-item__heading-wrapper'>
-              <h4 className='comments-item__author-name'>Kurt Thompson</h4>
+              <h4 className='comments-item__author-name'>{comment.author.name}</h4>
               <span className='comments-item__posted-date'>
                       <FontAwesomeIcon icon={['far', 'clock']} />
-                      <b>2015-07-06</b> at <b>13:57</b>
+                      <b>{posted.format('YYYY-MM-DD')}</b> at <b>{posted.format('HH:mm')}</b>
                     </span>
             </div>
-            <span className='comments-item__text'>If not everyone makes money blogging, why is blogging so popular?</span>
+            <span className='comments-item__text'>
+              {comment.content}
+            </span>
             <div className='comments-item__actions-wrapper'>
-              <button className='comments-item__action'>
-                <FontAwesomeIcon icon='edit'/> Edit
-              </button>
-              <button className='comments-item__action'>
-                <FontAwesomeIcon icon='times'/> Delete
-              </button>
-              <button className='comments-item__action'>
+              {
+                +comment.author.id === userId && (
+                  <button className='comments-item__action' onClick={() => {
+                    this.setState({
+                      isEdit: true
+                    }, () => {
+                      openReplyForm(comment.id)
+                    })
+                  }}>
+                    <FontAwesomeIcon icon='edit'/> Edit
+                  </button>
+                )
+              }
+              {
+                +comment.author.id === userId && (
+                  <button className='comments-item__action'>
+                    <FontAwesomeIcon icon='times'/> Delete
+                  </button>
+                )
+              }
+              <button className='comments-item__action' onClick={() => {
+                this.setState({
+                  isEdit: false,
+                }, () => {
+                  openReplyForm(comment.id)
+                })
+              }}>
                 <FontAwesomeIcon icon='reply'/> Reply
               </button>
             </div>
           </section>
         </div>
 
-        <form className='comments-feedback__form comments-feedback__form--reply dn'>
-          <div className='comments-feedback__form-actions'>
-            <h4 className={`
-                    comments-item__author-name comments-item__author-name--replied
-                    comments-item__author-name--small
-                  `}>
-              <FontAwesomeIcon icon='share'/> Kurt Thompson
-            </h4>
-            <button className='comments-item__action'>
-              <FontAwesomeIcon icon='times'/> Cancel
-            </button>
-          </div>
-          <div className='comments-feedback__form-wrapper'>
-                  <textarea
-                    className='comments-feedback__textarea'
-                    cols='30' rows='10'
-                    placeholder='Your Message'
-                  />
-            <button className='comments-feedback__submit-button' type='submit'>Send</button>
-          </div>
-        </form>
+        {
+          +comment.id === +replyId && (
+            <FeedbackForm
+              isReply={true}
+              replyTo={comment.author.name}
+              closeForm={openReplyForm}
+              isEdit={this.state.isEdit}
+              startText={this.state.isEdit ? comment.content : ''}
+            />
+          )
+        }
 
-        <ul className='comments-item__children'>
-          <li className='comments-item comments-item--child'>
-            <div className='comments-item__main-wrapper comments-item__main-wrapper--child'>
-              <div className='comments__author-wrapper comments__author-wrapper--small'>
-                <img className='comments__author-avatar' src={UserAvatar} alt='username'/>
-              </div>
-
-              <section className='comments-item__data comments-item__data--small'>
-                <div className='comments-item__heading-wrapper'>
-                  <h4 className='comments-item__author-name'>Sarah Fleming</h4>
-                  <h4 className='comments-item__author-name comments-item__author-name--replied'>
-                    <FontAwesomeIcon icon='share'/> Kurt Thompson
-                  </h4>
-                  <span className='comments-item__posted-date'>
-                        <FontAwesomeIcon icon={['far', 'clock']} /> 2015-07-06 at 13:57
-                      </span>
-                </div>
-                <span className='comments-item__text'>
-                      A WordPress blog will stand out!
-                    </span>
-              </section>
-            </div>
-          </li>
-          <li className='comments-item comments-item--child'>
-            <div className='comments-item__main-wrapper comments-item__main-wrapper--child'>
-              <div className='comments__author-wrapper comments__author-wrapper--small'>
-                <img className='comments__author-avatar' src={UserAvatar} alt='username'/>
-              </div>
-
-              <section className='comments-item__data comments-item__data--small'>
-                <div className='comments-item__heading-wrapper'>
-                  <h4 className='comments-item__author-name'>Purificacion Rojas</h4>
-                  <h4 className='comments-item__author-name comments-item__author-name--replied'>
-                    <FontAwesomeIcon icon='share'/> Kurt Thompson
-                  </h4>
-                  <span className='comments-item__posted-date'>
-                        <FontAwesomeIcon icon={['far', 'clock']} /> 2015-07-06 at 13:57
-                      </span>
-                </div>
-                <span className='comments-item__text'>
-                      A WordPress blog will stand out!
-                    </span>
-              </section>
-            </div>
-          </li>
-          <li className='comments-item comments-item--child'>
-            <div className='comments-item__main-wrapper comments-item__main-wrapper--child'>
-              <div className='comments__author-wrapper comments__author-wrapper--small'>
-                <img className='comments__author-avatar' src={UserAvatar} alt='username'/>
-              </div>
-
-              <section className='comments-item__data comments-item__data--small'>
-                <div className='comments-item__heading-wrapper'>
-                  <h4 className='comments-item__author-name'>Purificacion Rojas</h4>
-                  <h4 className='comments-item__author-name comments-item__author-name--replied'>
-                    <FontAwesomeIcon icon='share'/> Kurt Thompson
-                  </h4>
-                  <span className='comments-item__posted-date'>
-                        <FontAwesomeIcon icon={['far', 'clock']} /> 2015-07-06 at 13:57
-                      </span>
-                </div>
-                <span className='comments-item__text'>
-                      A WordPress blog will stand out!
-                    </span>
-              </section>
-            </div>
-          </li>
-        </ul>
+        {
+          !!comment.children.length && (
+            <ul className='comments-item__children'>
+              {
+                comment.children.map(child =>
+                  <CommentsItemChild key={child.id} comment={child} parentComment={comment}/>)
+              }
+            </ul>
+          )
+        }
       </li>
     )
   }

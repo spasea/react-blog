@@ -209,6 +209,10 @@
     &:hover {
       color: darken(#b6b6b6, 10%);
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   @include el(children) {
