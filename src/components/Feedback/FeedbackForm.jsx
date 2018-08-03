@@ -8,7 +8,8 @@ class FeedbackForm extends React.Component {
     super()
 
     this.state = {
-      formText: ''
+      formText: '',
+      isLoading: false,
     }
   }
 
@@ -32,6 +33,32 @@ class FeedbackForm extends React.Component {
     this.changeInput(e.target.value)
   }
 
+  handleSubmit = e => {
+    e.preventDefault()
+
+    const {
+      formText,
+    } = this.state
+
+    const {
+      callback
+    } = this.props
+
+    if (formText === '') {
+      alert('You must fill the input')
+      return
+    }
+    this.setState({
+      isLoading: true
+    })
+
+    callback(formText)
+      .finally(() => this.setState({
+        isLoading: false,
+        formText: '',
+      }))
+  }
+
   render() {
     const {
       isReply,
@@ -39,6 +66,11 @@ class FeedbackForm extends React.Component {
       closeForm,
       isEdit,
     } = this.props
+
+    const {
+      isLoading,
+      formText,
+    } = this.state
 
     return (
       <form className={`comments-feedback__form ${isReply && 'comments-feedback__form--reply'}`}>
@@ -65,11 +97,15 @@ class FeedbackForm extends React.Component {
                   <textarea
                     className='comments-feedback__textarea'
                     cols='30' rows='10'
-                    value={this.state.formText}
+                    disabled={isLoading}
+                    value={formText}
                     onChange={this.typeText}
                     placeholder='Your Message'
                   />
-          <button className='comments-feedback__submit-button' type='submit'>
+          <button className='comments-feedback__submit-button' type='submit'
+                  disabled={isLoading}
+                  onClick={this.handleSubmit}
+          >
             { isEdit ? 'Edit' : 'Send'}
           </button>
         </div>
@@ -83,7 +119,8 @@ FeedbackForm.defaultProps = {
   isEdit: false,
   startText: '',
   replyTo: '',
-  closeForm: () => ''
+  closeForm: () => '',
+  callback: () => Promise.resolve()
 }
 
 export default FeedbackForm
