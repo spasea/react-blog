@@ -44,8 +44,7 @@ $properties: (
   @font-face {
     font-family: #{$fullFont};
     src: url("./fonts/#{$fontName}/#{$fullFont}/#{$fullFont}.eot");
-    src: url("./fonts/#{$fontName}/#{$fullFont}/#{$fullFont}.eot?#iefix") format("embedded-opentype"),
-    url("./fonts/#{$fontName}/#{$fullFont}/#{$fullFont}.woff") format("woff"),
+    src: url("./fonts/#{$fontName}/#{$fullFont}/#{$fullFont}.woff") format("woff"),
     url("./fonts/#{$fontName}/#{$fullFont}/#{$fullFont}.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;

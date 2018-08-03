@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import objectFitImages from 'object-fit-images'
 
 import Article from './components/Article/Article'
 import Background from './components/Background/Background'
@@ -13,6 +14,10 @@ import { faClock, far } from '@fortawesome/free-regular-svg-icons'
 library.add(far, faUser, faClock, faComment, faEdit, faTimes, faReply, faShare)
 
 class App extends Component {
+  componentDidMount () {
+    objectFitImages()
+  }
+
   render() {
     return (
       <main className='main-wrapper'>

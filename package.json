@@ -89,7 +89,9 @@
     "presets": [
       "react-app"
     ],
-    "plugins": ["transform-class-properties"]
+    "plugins": [
+      "transform-class-properties"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -102,6 +104,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
+    "object-fit-images": "^3.2.3",
     "sass-loader": "^7.1.0"
   }
 }
