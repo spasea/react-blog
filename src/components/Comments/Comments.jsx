@@ -9,8 +9,11 @@ class Comments extends React.Component {
 
     this.state = {
       comments: [],
+      count: 5,
+      offset: 0,
       userId: 1,
       replyId: null,
+      isLoading: false,
     }
   }
 
@@ -18,11 +21,27 @@ class Comments extends React.Component {
     this.loadComments()
   }
 
-  loadComments () {
-    $axios.get(`/pages/${config.email}/comments`)
+  loadComments = () => {
+    const {
+      count,
+      offset,
+    } = this.state
+
+    this.setState({
+      isLoading: true,
+    })
+
+    $axios.get(`/pages/${config.email}/comments`, {
+        params: {
+          count,
+          offset,
+        }
+      })
       .then(response => {
         this.setState({
-          comments: response.data
+          comments: response.data,
+          offset: offset + count,
+          isLoading: false,
         })
       })
   }
@@ -37,6 +56,7 @@ class Comments extends React.Component {
     const {
       comments,
       userId,
+      isLoading,
     } = this.state
 
     return (
@@ -56,7 +76,12 @@ class Comments extends React.Component {
         </ul>
 
         <div className='comments__load-container'>
-          <button className='comments__load-button'>load more comments</button>
+          <button className='comments__load-button'
+                  disabled={isLoading}
+                  onClick={this.loadComments}
+          >
+            load more comments
+          </button>
         </div>
       </div>
     )
