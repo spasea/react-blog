@@ -44,7 +44,7 @@ class Comments extends React.Component {
         }
       })
       .then(response => {
-        if (!response.data.length) {
+        if (!response.data.length || response.data.length < count) {
           _commentsExists = !_commentsExists
         }
 
