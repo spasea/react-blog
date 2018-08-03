@@ -93,16 +93,18 @@
 
   @include m(child) {
     margin-bottom: 0;
+
+    &:last-of-type {
+      .comments-item {
+        @include el(main-wrapper) {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 
   &:last-of-type {
     margin-bottom: 0;
-
-    .comments-item {
-      @include el(main-wrapper) {
-        margin-bottom: 0;
-      }
-    }
   }
 
   @include el(main-wrapper) {
